@@ -1,7 +1,7 @@
 //
 //  ViewController.swift
 //  SearchPro
-//
+//  This class is used to accept user input and query that into api call
 //  Created by Abhi on 5/15/17.
 //  Copyright © 2017 Abhi. All rights reserved.
 //
@@ -21,8 +21,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     let movieArray : NSMutableArray = NSMutableArray()
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.dataSource = [String]()
-        
         self.title = "Movie Search"
         self.movieTable.dataSource = self
     }
@@ -100,7 +98,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 ] as [String : Any]
         
         let isNetworkAvailables = APIClient.isNetworkAvailable()
-        
         if isNetworkAvailables {
             
             APIClient.sharedInstance.showProgress(inView: self.view)
@@ -108,18 +105,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 print(response)
                 APIClient.sharedInstance.hideProgress()
                 if (error == nil) {
-                    
                     let resutls = response! as NSDictionary
                     self.page = resutls.value(forKey: "page") as! Int
                     self.total_page = resutls.value(forKey: "total_pages") as! Int
-                    
                     let total_results = resutls.value(forKey: "total_results")
                     let result = resutls.value(forKey: "results") as! NSArray
                     
-                    
                     for res in result{
                         let modelClass : MovieModel = MovieModel()
-                        
                         let subMovie = res as! NSDictionary
                         let adult = subMovie.value(forKey: "adult") as! Bool
                         let genre_ids = subMovie.value(forKey: "genre_ids") as! NSArray
@@ -128,7 +121,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         let original_title = subMovie.value(forKey: "original_title") as! String
                         let overview = subMovie.value(forKey: "overview") as! String
                         let popularity = subMovie.value(forKey: "popularity") as! Double
-                       
                         var poster_path = ""
                         if (subMovie.value(forKey: "poster_path") as? String) != nil {
                                poster_path = subMovie.value(forKey: "poster_path") as! String
@@ -138,8 +130,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         let title = subMovie.value(forKey: "title") as! String
                         let vote_average = subMovie.value(forKey: "vote_average") as! Double
                         let vote_count = subMovie.value(forKey: "vote_count") as! Int
-                        
-                        
                         
                         modelClass.adult = adult
                         modelClass.genre_ids  =  genre_ids
@@ -154,12 +144,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         modelClass.vote_average = vote_average
                         modelClass.vote_count = vote_count
                         modelClass.release_date = release_date
-                        
-                        
                         self.movieArray.add(modelClass)
-                        
                     }
-                    
                     self.movieTable.reloadData()
                     
                 }else{
@@ -167,8 +153,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                     let alert = UIAlertController(title: "Error", message: error?.description, preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
-             
-            
                 }
               }
             }
@@ -178,42 +162,27 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     func apiCall()
     {
         var page_number = 0
-        
-        if(page > total_page){
-            
-        }else{
-         
-        // self.total_page += 1
-         page_number = total_page
-        // movieArray.removeAllObjects()
+        if(page >= total_page){
+        page_number = total_page
         let param = ["api_key" : "8cd0ee3043eb3a403c9bb01ed3f494ad",
                      "language" : "en-US",
                      "page":page_number,
                      "include_adult" : "false",
                      "query" : txtVIEWSearch.text
             ] as [String : Any]
-        
         let isNetworkAvailables = APIClient.isNetworkAvailable()
         
         if isNetworkAvailables {
-            
             APIClient.sharedInstance.showProgress(inView: self.view)
-            APIClient.sharedInstance.MakeAPICallWithEndURl(BASE_URL.appending(kMakeFilter) as NSString, parameters: param as NSDictionary!) { (response, error) in
-                
-                APIClient.sharedInstance.hideProgress()
+            APIClient.sharedInstance.MakeAPICallWithEndURl(BASE_URL.appending(kMakeFilter) as NSString, parameters: param as NSDictionary!) { (response, error) in APIClient.sharedInstance.hideProgress()
                 if (error == nil) {
-                    
                     let resutls = response! as NSDictionary
                     self.page = resutls.value(forKey: "page") as! Int
                     self.total_page = resutls.value(forKey: "total_pages") as! Int
-                    
                     let total_results = resutls.value(forKey: "total_results")
                     let result = resutls.value(forKey: "results") as! NSArray
-                    
-                    
                     for res in result{
                         let modelClass : MovieModel = MovieModel()
-                        
                         let subMovie = res as! NSDictionary
                         let adult = subMovie.value(forKey: "adult") as! Bool
                         let genre_ids = subMovie.value(forKey: "genre_ids") as! NSArray
@@ -222,20 +191,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         let original_title = subMovie.value(forKey: "original_title") as! String
                         let overview = subMovie.value(forKey: "overview") as! String
                         let popularity = subMovie.value(forKey: "popularity") as! Double
-                        
                         var poster_path = ""
                         if (subMovie.value(forKey: "poster_path") as? String) != nil {
                             poster_path = subMovie.value(forKey: "poster_path") as! String
                         }
-                        
                         let video = subMovie.value(forKey: "video") as! Bool
                         let title = subMovie.value(forKey: "title") as! String
                         let vote_average = subMovie.value(forKey: "vote_average") as! Double
                         let vote_count = subMovie.value(forKey: "vote_count") as! Int
-                        
-                        
-                        
-                        
                         
                         modelClass.adult = adult
                         modelClass.genre_ids  =  genre_ids
@@ -249,10 +212,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         modelClass.title  =  title
                         modelClass.vote_average = vote_average
                         modelClass.vote_count = vote_count
-                        
-                        
                         self.movieArray.add(modelClass)
-                        
                     }
                     
                     self.movieTable.reloadData()

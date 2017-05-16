@@ -65,6 +65,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		38088B0A1ECB4937001F0CC4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D43BD7741ECA5AA5007AC80D /* MovieTVCell.swift */,
+				D43BD7761ECA6EC8007AC80D /* MovieDetailsVC.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		38088B0B1ECB4944001F0CC4 /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				D450D33F1ECA285D00DCFE54 /* Main.storyboard */,
+				D450D3421ECA285D00DCFE54 /* Assets.xcassets */,
+				D450D3441ECA285D00DCFE54 /* LaunchScreen.storyboard */,
+			);
+			name = "User Interface";
+			sourceTree = "<group>";
+		};
 		CBB792EDD5E3E2C9D5BE6080 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,13 +120,10 @@
 				D450D33D1ECA285C00DCFE54 /* ViewController.swift */,
 				382C1C901ECABEE700CEEC87 /* L3SDKLazyTableView.swift */,
 				382C1C911ECABEE700CEEC87 /* L3SDKUtilityLazyLoad.swift */,
-				D43BD7741ECA5AA5007AC80D /* MovieTVCell.swift */,
+				38088B0A1ECB4937001F0CC4 /* Models */,
 				D450D3541ECA2AB500DCFE54 /* SearchPro-Bridging-Header.h */,
-				D450D33F1ECA285D00DCFE54 /* Main.storyboard */,
-				D450D3421ECA285D00DCFE54 /* Assets.xcassets */,
-				D450D3441ECA285D00DCFE54 /* LaunchScreen.storyboard */,
+				38088B0B1ECB4944001F0CC4 /* User Interface */,
 				D450D3471ECA285D00DCFE54 /* Info.plist */,
-				D43BD7761ECA6EC8007AC80D /* MovieDetailsVC.swift */,
 			);
 			path = SearchPro;
 			sourceTree = "<group>";
