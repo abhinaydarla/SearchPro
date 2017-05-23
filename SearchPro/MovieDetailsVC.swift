@@ -21,7 +21,6 @@ class MovieDetailsVC: UIViewController {
     @IBOutlet var txt_title: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Movie Details"
         txt_title.text = model_obg.title
         txtoverView.text = model_obg.overview
@@ -29,22 +28,10 @@ class MovieDetailsVC: UIViewController {
         popularity.text = String(model_obg.popularity)
         release_date.text = model_obg.release_date
         vote_average.text = String(model_obg.vote_average)
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }
